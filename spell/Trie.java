@@ -1,6 +1,16 @@
 package spell;
 
 public class Trie implements ITrie {
+
+
+    // Data Members
+
+    private int wordCount;
+
+    private int nodeCount;
+
+    Node root = new Node();
+
     /**
      * Adds the specified word to the trie (if necessary) and increments the word's frequency count
      *
@@ -9,8 +19,40 @@ public class Trie implements ITrie {
     public void add(String word)
     {
 
+            addRecursive(this.root, word);
     }
 
+    public void addRecursive(Node currentNode, String word) throws NullPointerException
+    {
+
+
+        if(word.equals(""))
+        {
+            //we have added a word
+            //increase frequency
+            currentNode.count++;
+        }
+        else
+        {
+            char c = word.charAt(0);
+
+            int index = c - 'a';
+
+             if (currentNode.nodes[index] != null)
+                {
+                    //node already exists, so follow it
+                    addRecursive(currentNode.nodes[index], word.substring(1,word.length()));
+                }
+        else if(currentNode.nodes[index] == null)
+                {
+                    //create a new node here and add it
+                    Node letterNode = new Node();
+                    currentNode.nodes[index] = letterNode;
+                    addRecursive(letterNode, word.substring(1,word.length()));
+                }
+        }
+
+    }
     /**
      * Searches the trie for the specified word
      *
@@ -83,6 +125,11 @@ public class Trie implements ITrie {
      * Your trie node class should implement the ITrie.INode interface
      */
     public class Node implements ITrie.INode {
+
+        private int count;
+
+        private Node nodes[] = new Node[26];
+
 
         /**
          * Returns the frequency count for the word represented by the node

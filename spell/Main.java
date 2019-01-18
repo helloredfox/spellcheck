@@ -13,22 +13,31 @@ public class Main {
 	 * as the second argument.
 	 */
 	public static void main(String[] args) throws IOException {
-		
-		String dictionaryFileName = args[0];
-		String inputWord = args[1];
+//
+//		String dictionaryFileName = args[0];
+//		String inputWord = args[1];
+
+		Trie tryMe = new Trie();
+
+		tryMe.add("green");
+		tryMe.add("green");
+		tryMe.add("ornage");
+		int red = 4;
+
+
 		
 		/**
 		 * Create an instance of your corrector here
 		 */
-		ISpellCorrector corrector = null;
-		
-		corrector.useDictionary(dictionaryFileName);
-		String suggestion = corrector.suggestSimilarWord(inputWord);
-		if (suggestion == null) {
-		    suggestion = "No similar word found";
-		}
-		
-		System.out.println("Suggestion is: " + suggestion);
+//		ISpellCorrector corrector = null;
+//
+//		corrector.useDictionary(dictionaryFileName);
+//		String suggestion = corrector.suggestSimilarWord(inputWord);
+//		if (suggestion == null) {
+//		    suggestion = "No similar word found";
+//		}
+//
+//		System.out.println("Suggestion is: " + suggestion);
 	}
 
 }
