@@ -22,7 +22,7 @@ public class Main {
 		tryMe.add("green");
 		tryMe.add("green");
 		tryMe.add("ornage");
-		int red = 4;
+
 
 
 		
