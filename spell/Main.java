@@ -17,13 +17,13 @@ public class Main {
 //		String dictionaryFileName = args[0];
 //		String inputWord = args[1];
 
-		Trie tryMe = new Trie();
+	SpellCorrector corr = new SpellCorrector();
 
-		tryMe.add("green");
-		tryMe.add("green");
-		tryMe.add("ornage");
+	corr.useDictionary(args[0]);
 
+	String words = corr.dictionary.toString();
 
+		System.out.println(words);
 
 		
 		/**
