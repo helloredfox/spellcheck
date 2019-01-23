@@ -6,13 +6,10 @@ public class Trie implements ITrie {
     // Data Members
 
     private int wordCount;
-
-    private int nodeCount;
-
+    private int nodeCount = 1;
     private StringBuilder wordList = new StringBuilder();
     private StringBuilder word = new StringBuilder();
-
-    Node root = new Node();
+   private Node root = new Node();
 
 /**
  *
@@ -24,6 +21,78 @@ public void addOneToWordCount()
 {
     this.wordCount++;
 }
+
+
+    /**
+     *
+     * Takes a letter and returns the index as an int
+     *
+     * @param letter a single letter(String)
+     */
+
+    public int letterToIndex(String letter)
+    {
+        int index = 0;
+
+        switch(letter)
+        {
+            case "a": index = 0;
+            break;
+            case "b": index = 1;
+            break;
+            case "c": index = 2;
+            break;
+            case "d": index = 3;
+                break;
+            case "e": index = 4;
+                break;
+            case "f": index = 5;
+                break;
+            case "g": index = 6;
+                break;
+            case "h": index = 7;
+                break;
+            case "i": index = 8;
+                break;
+            case "j": index =9;
+                break;
+            case "k": index = 10;
+                break;
+            case "l": index = 11;
+                break;
+            case "m": index = 12;
+                break;
+            case "n": index = 13;
+                break;
+            case "o": index = 14;
+                break;
+            case "p": index = 15;
+                break;
+            case "q": index = 16;
+                break;
+            case "r": index = 17;
+                break;
+            case "s": index = 18;
+                break;
+            case "t": index = 19;
+                break;
+            case "u": index = 20;
+                break;
+            case "v": index = 21;
+                break;
+            case "w": index = 22;
+                break;
+            case "x": index = 23;
+                break;
+            case "y": index = 24;
+                break;
+            case "z": index = 25;
+                break;
+        }
+
+        return index;
+    }
+
 
     /**
      *
@@ -89,7 +158,6 @@ public void addOneToWordCount()
                 break;
             case 25: letterVal = "z";
                 break;
-
         }
 
         return letterVal;
@@ -132,6 +200,8 @@ public void addOneToWordCount()
                     //create a new node here and add it
                     Node letterNode = new Node();
                     currentNode.nodes[index] = letterNode;
+                    //added a new node, so increase nodeCount
+                    this.nodeCount++;
                     addRecursive(letterNode, word.substring(1,word.length()));
                 }
         }
@@ -147,10 +217,89 @@ public void addOneToWordCount()
      */
     public Trie.Node find(String word)
     {
-        Trie.Node node = new Trie.Node();
+        Trie.Node node = null;
+
+        word = word.toLowerCase();
+
+        //loop through all letters in the word
+        //if for the given letter, a node exists
+            //dive into that node and check for the next letter
+        for(int i = 0; i < word.length(); i++)
+        {
+
+            if(word.equals(""))
+            {
+                //check the frequency of the current node
+                if(node.count > 0)
+                {
+                    //we have a match
+                    node = this.root.nodes[i];
+                }
+            }
+            else {
+                char letter = word.charAt(i);
+                String let = Character.toString(letter);
+
+                int index = letterToIndex(let);
+
+                if (this.root.nodes[index] != null) {
+                    //dive into that node
+                    node = findHelper(this.root.nodes[index], word.substring(1));
+                    return node;
+                }
+                else
+                {
+                   node = null;
+                   return node;
+
+                }
+            }
+
+        }
 
         return node;
     }
+
+    public Trie.Node findHelper(Node node, String word)
+    {
+        Node finalNode = null;
+
+        if(word.equals(""))
+        {
+            //check the frequency of the current node
+            if(node.count > 0)
+            {
+                //we have a match
+                finalNode = node;
+                return finalNode;
+            }
+        }
+        else
+        {
+
+            for(int i = 0; i < word.length(); i++)
+            {
+
+                    char letter = word.charAt(i);
+                    String let = Character.toString(letter);
+
+                    int index = letterToIndex(let);
+
+                    if (node.nodes[index] != null) {
+                        //dive into that node(word.substring(1) uses
+                        finalNode = findHelper(node.nodes[index], word.substring(1));
+                        return finalNode;
+                    }
+                    else
+                    {
+                        finalNode = null;
+                        return finalNode;
+                    }
+            }
+        }
+        return finalNode;
+    }
+
 
     /**
      * Returns the number of unique words in the trie
@@ -159,9 +308,7 @@ public void addOneToWordCount()
      */
     public int getWordCount()
     {
-        int wordCount = 0;
-
-        return wordCount;
+        return this.wordCount;
     }
 
     /**
@@ -171,9 +318,7 @@ public void addOneToWordCount()
      */
     public int getNodeCount()
     {
-        int nodeCount = 0;
-
-        return nodeCount;
+        return this.nodeCount;
     }
 
     /**
@@ -211,7 +356,6 @@ public void addOneToWordCount()
                 }
             }
         }
-
         return this.wordList.toString();
     }
 
@@ -250,17 +394,97 @@ public void addOneToWordCount()
     {
         int hashCode = 0;
 
+        // This hash code take the number of letters(this.nodeCont) and multiplies it by the # of words. Then it divides by 3(integer division).
+
+        hashCode = (this.nodeCount* this.wordCount)/3;
+
         return hashCode;
     }
 
     @Override
     public boolean equals(Object o)
     {
-        Boolean isEqual = false;
+        Boolean isEqual = true;
+
+        if(o == null)
+        {
+            isEqual = false;
+        }
+        else if(o == this)
+        {
+            //true, they are equal
+            isEqual = true;
+        }
+        else
+        {
+           if(o.getClass() == this.getClass())
+           {
+               //now we need to check the nodes
+
+               //cast o as a Trie, right now it's only an object class, but we know it is a Trie
+               Trie secondTrie = (Trie)o;
+
+               //check word count and node count
+               if(secondTrie.wordCount == this.wordCount && secondTrie.nodeCount == this.nodeCount)
+               {
+                   //now we need to check all the nodes
+                   for(int i = 0; i < this.root.nodes.length; i++)
+                   {
+                       if(secondTrie.root.nodes[i] == null && this.root.nodes[i] == null)
+                       {
+                           //do nothing, move on to the next one
+                       }
+                       else if(secondTrie.root.nodes[i] != null && this.root.nodes[i] != null)
+                       {
+                           //traverse the node and compare again
+                          isEqual = equalsHelper(secondTrie.root.nodes[i],this.root.nodes[i]);
+                          return isEqual;
+                       }
+                       else if(secondTrie.root.nodes[i] != this.root.nodes[i])
+                       {
+                           isEqual = false;
+                       }
+                   }
+               }
+               else
+               {
+                   isEqual = false;
+               }
+           }
+           else
+           {
+               //if they aren't the same class, they are not equal
+               isEqual = false;
+           }
+        }
 
         return isEqual;
     }
 
+    public boolean equalsHelper(Node node1, Node node2)
+    {
+        boolean areEqual = true;
+
+        for(int i = 0; i < this.root.nodes.length; i++)
+        {
+            if(node1.nodes[i] == null && node2.nodes[i] == null)
+            {
+                //do nothing, move on to the next one
+            }
+            else if(node1.nodes[i] != null && node2.nodes[i] != null)
+            {
+                //traverse the node and compare again
+               areEqual = equalsHelper(node1.nodes[i], node2.nodes[i]);
+               return areEqual;
+            }
+            else if(node1.nodes[i] != node2.nodes[i])
+            {
+                //the Trie's aren't equal, return false
+                areEqual = false;
+            }
+        }
+        return areEqual;
+    }
     /**
      * Your trie node class should implement the ITrie.INode interface
      */
@@ -278,40 +502,8 @@ public void addOneToWordCount()
          */
         public int getValue()
         {
-            int value = 0;
-
-            return value;
+            return this.count;
         }
     }
 
-    /*
-     * EXAMPLE:
-     *
-     * public class Words implements ITrie {
-     *
-     * 		public void add(String word) { ... }
-     *
-     * 		public ITrie.INode find(String word) { ... }
-     *
-     * 		public int getWordCount() { ... }
-     *
-     * 		public int getNodeCount() { ... }
-     *
-     *		@Override
-     *		public String toString() { ... }
-     *
-     *		@Override
-     *		public int hashCode() { ... }
-     *
-     *		@Override
-     *		public boolean equals(Object o) { ... }
-     *
-     * }
-     *
-     * public class WordNode implements ITrie.INode {
-     *
-     * 		public int getValue() { ... }
-     * }
-     *
-     */
 }
