@@ -330,6 +330,8 @@ public void addOneToWordCount()
     public String toString()
     {
 
+        this.wordList.setLength(0);
+
         for(int i = 0; i < this.root.nodes.length; i++)
         {
             // if null, do nothing

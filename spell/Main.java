@@ -24,9 +24,20 @@ public class Main {
 		String words = corr.dictionary.toString();
 		System.out.println(words);
 //
-//		SpellCorrector corr2 = new SpellCorrector();
-//
-//		corr2.useDictionary(args[1]);
+		SpellCorrector corr2 = new SpellCorrector();
+
+		corr2.useDictionary(args[1]);
+
+		String words1 = corr.dictionary.toString();
+
+		String words2 = corr2.dictionary.toString();
+
+
+        System.out.println("First: \n" + words1);
+
+        System.out.println("First: \n" + words1);
+
+        //System.out.println("Second: \n" +words2);
 //
 //		if(corr2.dictionary.equals(corr.dictionary))
 //		{
@@ -44,7 +55,7 @@ public class Main {
 		ISpellCorrector corrector = new SpellCorrector();
 
 		corrector.useDictionary(args[0]);
-		String suggestion = corrector.suggestSimilarWord("worlxld");
+		String suggestion = corrector.suggestSimilarWord(args[1]);
 		if (suggestion == null) {
 		    suggestion = "No similar word found";
 		}
