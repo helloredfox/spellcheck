@@ -436,25 +436,38 @@ public void addOneToWordCount()
                        }
                        else if(secondTrie.root.nodes[i] != null && this.root.nodes[i] != null)
                        {
-                           //traverse the node and compare again
-                          isEqual = equalsHelper(secondTrie.root.nodes[i],this.root.nodes[i]);
-                          return isEqual;
+                           if(secondTrie.root.nodes[i].count == this.root.nodes[i].count)
+                           {
+                               //traverse the node and compare again
+                               isEqual = equalsHelper(secondTrie.root.nodes[i],this.root.nodes[i]);
+                               if(isEqual == false)
+                               {
+                                   break;
+                               }
+
+                           }
+                           else
+                           {
+                              return false;
+                           }
+
+
                        }
                        else if(secondTrie.root.nodes[i] != this.root.nodes[i])
                        {
-                           isEqual = false;
+                           return false;
                        }
                    }
                }
                else
                {
-                   isEqual = false;
+                   return false;
                }
            }
            else
            {
                //if they aren't the same class, they are not equal
-               isEqual = false;
+               return false;
            }
         }
 
@@ -473,14 +486,26 @@ public void addOneToWordCount()
             }
             else if(node1.nodes[i] != null && node2.nodes[i] != null)
             {
-                //traverse the node and compare again
-               areEqual = equalsHelper(node1.nodes[i], node2.nodes[i]);
-               return areEqual;
+                if(node1.nodes[i].count == node2.nodes[i].count)
+                {
+                    //traverse the node and compare again
+                    areEqual = equalsHelper(node1.nodes[i], node2.nodes[i]);
+                    if(areEqual == false)
+                    {
+                        break;
+                    }
+
+                }
+                else
+                {
+                    return false;
+                }
+
             }
             else if(node1.nodes[i] != node2.nodes[i])
             {
                 //the Trie's aren't equal, return false
-                areEqual = false;
+                return false;
             }
         }
         return areEqual;
@@ -490,7 +515,7 @@ public void addOneToWordCount()
      */
     public class Node implements ITrie.INode {
 
-        private int count;
+        private int count = 0;
 
         private Node nodes[] = new Node[26];
 

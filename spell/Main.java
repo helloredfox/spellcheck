@@ -13,51 +13,28 @@ public class Main {
 	 * as the second argument.
 	 */
 	public static void main(String[] args) throws IOException {
+
+
+
 //
-//		String dictionaryFileName = args[0];
-//		String inputWord = args[1];
-
-//	SpellCorrector corr1 = new SpellCorrector();
+//		SpellCorrector corr = new SpellCorrector();
 //
-//	corr1.useDictionary(args[0]);
-
-
-//SpellCorrector corr2 = new SpellCorrector();
+//		corr.useDictionary(args[0]);
 //
-//corr2.useDictionary(args[1]);
-
-//test .equals()
-
-		//boolean areEqual = corr1.dictionary.equals(corr2.dictionary);
-
-//test hash code
-//		if(corr1.dictionary.hashCode() == corr2.dictionary.hashCode())
+//		SpellCorrector corr2 = new SpellCorrector();
+//
+//		corr2.useDictionary(args[1]);
+//
+//		if(corr2.dictionary.equals(corr.dictionary))
 //		{
-//			System.out.println("The hashcodes are the same for 2 equal Tries.");
+//			System.out.println("Equal dictionaries");
 //		}
 //		else
 //		{
-//			System.out.println("The hascodes are different because the tries are not equal");
+//			System.out.println("Dictionaries aren't equal");
 //		}
-//
-//		corr1.getAlterationDistWords("top");
-//		corr1.getInsertionDistWords("ask");
-
-// Print out dictionaries
-//		String words = corr1.dictionary.toString();
-//
-//		System.out.println(words);
-//
-//		String words2 = corr2.dictionary.toString();
-//
-//		System.out.println(words2);
 
 
-
-
-
-		int red = 4;
-		
 		/**
 		 * Create an instance of your corrector here
 		 */
