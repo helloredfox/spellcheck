@@ -342,13 +342,15 @@ public void addOneToWordCount()
                 //add letter to the word string builder
                 String letter = indexToLetter(i);
                 this.word.append(letter);
-                toStringHelper(this.root.nodes[i]);
+
 
                 if(this.root.nodes[i].count > 0)
                 {
                     //there is a word here, add it to the word list
                     this.wordList.append(this.word);
                 }
+
+                toStringHelper(this.root.nodes[i]);
                 //remove letter from word(make sure the word has at least 1 letter to remove first)
                 if(this.word.length() > 0)
                 {
@@ -374,12 +376,13 @@ public void addOneToWordCount()
                //add letter to the word string builder
                String letter = indexToLetter(i);
                this.word.append(letter);
-               toStringHelper(node.nodes[i]);
+
                if(node.nodes[i].count > 0)
                {
                    //there is a word here, add it to the word list
                    this.wordList.append(this.word + "\n");
                }
+               toStringHelper(node.nodes[i]);
                //remove letter from word(make sure the word has at least 1 letter to remove first)
                if(this.word.length() > 0)
                {

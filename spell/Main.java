@@ -17,9 +17,12 @@ public class Main {
 
 
 //
-//		SpellCorrector corr = new SpellCorrector();
-//
-//		corr.useDictionary(args[0]);
+		SpellCorrector corr = new SpellCorrector();
+
+		corr.useDictionary(args[0]);
+
+		String words = corr.dictionary.toString();
+		System.out.println(words);
 //
 //		SpellCorrector corr2 = new SpellCorrector();
 //
