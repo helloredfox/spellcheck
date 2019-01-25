@@ -170,6 +170,7 @@ public void addOneToWordCount()
      */
     public void add(String word)
     {
+        word = word.toLowerCase();
 
             addRecursive(this.root, word);
     }
@@ -177,6 +178,7 @@ public void addOneToWordCount()
     public void addRecursive(Node currentNode, String word) throws NullPointerException
     {
 
+        word = word.toLowerCase();
 
         if(word.equals(""))
         {

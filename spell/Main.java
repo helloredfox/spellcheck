@@ -21,21 +21,16 @@ public class Main {
 
 		corr.useDictionary(args[0]);
 
-		String words = corr.dictionary.toString();
-		System.out.println(words);
-//
-		SpellCorrector corr2 = new SpellCorrector();
+		//String words = corr.dictionary.toString();
+		//System.out.println(words);
 
-		corr2.useDictionary(args[1]);
 
 		String words1 = corr.dictionary.toString();
 
-		String words2 = corr2.dictionary.toString();
 
 
         System.out.println("First: \n" + words1);
 
-        System.out.println("First: \n" + words1);
 
         //System.out.println("Second: \n" +words2);
 //

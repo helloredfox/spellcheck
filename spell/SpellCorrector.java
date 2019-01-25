@@ -44,6 +44,9 @@ public class SpellCorrector implements ISpellCorrector {
      */
     public String suggestSimilarWord(String inputWord)
     {
+
+        inputWord = inputWord.toLowerCase();
+
         String finalString = null;
 
         //check for edit distances of 1
